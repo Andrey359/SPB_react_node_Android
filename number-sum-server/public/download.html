@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скачать Number Sum</title>
+    <meta name="description" content="Скачайте приложение Number Sum для Android бесплатно.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="/" class="logo">
+                    <img src="/images/logo.svg" alt="Number Sum" class="logo__img" onerror="this.src='/images/logo-placeholder.png'">
+                    <span class="logo__text">Number Sum</span>
+                </a>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="/" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="/about.html" class="nav__link">О приложении</a></li>
+                        <li class="nav__item"><a href="/pricing.html" class="nav__link">Купить</a></li>
+                        <li class="nav__item"><a href="/download.html" class="nav__link nav__link--active">Скачать</a></li>
+                    </ul>
+                </nav>
+                <div class="header__auth auth" id="authButtons">
+                    <a href="/auth/login.html" class="auth__link">Войти</a>
+                    <a href="/auth/register.html" class="auth__btn btn">Регистрация</a>
+                </div>
+                <div class="header__user user hidden" id="userInfo">
+                    <span class="user__name" id="userName"></span>
+                    <a href="/account/" class="user__account">Личный кабинет</a>
+                    <button class="user__logout" id="logoutBtn">Выйти</button>
+                </div>
+                <button class="header__burger" id="burgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="download">
+            <div class="container">
+                <div class="download__inner">
+                    <h1 class="download__title">Скачать Number Sum</h1>
+                    <p class="download__text">Получите бесплатную версию приложения для выполнения математических операций с высокой точностью.</p>
+                    
+                    <a href="/downloads/number-sum.apk" id="download-button" class="download__btn btn btn--primary">
+                        <i class="fas fa-download"></i>
+                        Скачать Number Sum v1.0 (9.38 МБ)
+                    </a>
+                    
+                    <div class="download__info">
+                        <h3 class="download__info-title">Как установить приложение:</h3>
+                        <ol class="download__steps">
+                            <li class="download__step">Скачайте APK-файл на ваше устройство Android.</li>
+                            <li class="download__step">Откройте файл и нажмите "Установить".</li>
+                            <li class="download__step">Если появится предупреждение о безопасности, разрешите установку из неизвестных источников в настройках.</li>
+                            <li class="download__step">После завершения установки запустите приложение.</li>
+                        </ol>
+                        
+                        <h3 class="download__info-title">Системные требования:</h3>
+                        <ul class="download__requirements">
+                            <li class="download__requirement">Android 7.0 или выше</li>
+                            <li class="download__requirement">Минимум 15 МБ свободной памяти</li>
+                            <li class="download__requirement">После установки занимает до 13 МБ</li>
+                            <li class="download__requirement">Разрешение экрана 320x480 или выше</li>
+                        </ul>
+                    
+                    <div class="download__upgrade">
+                        <h3 class="download__upgrade-title">Получите полную версию</h3>
+                        <p class="download__upgrade-text">Приобретите лицензию всего за 10 рублей и получите доступ ко всем функциям приложения:</p>
+                        <ul class="download__features">
+                            <li class="download__feature">Использование без рекламы</li>
+                            <li class="download__feature">Темная тема</li>
+                            <li class="download__feature">Расширенные функции калькулятора</li>
+                        </ul>
+                        <a href="/pricing.html" class="download__upgrade-btn btn btn--outline">Купить полную версию</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__info">
+                    <a href="/" class="footer__logo logo">
+                        <img src="/images/logo.svg" alt="Number Sum" class="logo__img" onerror="this.src='/images/logo-placeholder.png'">
+                        <span class="logo__text">Number Sum</span>
+                    </a>
+                    <p class="footer__text">Number Sum — умный калькулятор для точных и быстрых расчетов на Android.</p>
+                </div>
+                <div class="footer__nav">
+                    <div class="footer__col">
+                        <h3 class="footer__title">Навигация</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="/" class="footer__link">Главная</a></li>
+                            <li class="footer__item"><a href="/about.html" class="footer__link">О приложении</a></li>
+                            <li class="footer__item"><a href="/pricing.html" class="footer__link">Купить</a></li>
+                            <li class="footer__item"><a href="/download.html" class="footer__link">Скачать</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h3 class="footer__title">Аккаунт</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="/auth/login.html" class="footer__link">Войти</a></li>
+                            <li class="footer__item"><a href="/auth/register.html" class="footer__link">Регистрация</a></li>
+                            <li class="footer__item"><a href="/account/" class="footer__link">Личный кабинет</a></li>
+                            <li class="footer__item"><a href="/account/license.html" class="footer__link">Лицензия</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h3 class="footer__title">Контакты</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="mailto:support@numbersum.ru" class="footer__link">support@numbersum.ru</a></li>
+                            <li class="footer__item"><a href="tel:+78001234567" class="footer__link">8 (800) 123-45-67</a></li>
+                        </ul>
+                        <div class="footer__social">
+                            <a href="#" class="footer__social-link"><i class="fab fa-vk"></i></a>
+                            <a href="#" class="footer__social-link"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="#" class="footer__social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 Number Sum. Все права защищены.</p>
+                <div class="footer__links">
+                    <a href="/privacy.html" class="footer__bottom-link">Политика конфиденциальности</a>
+                    <a href="/terms.html" class="footer__bottom-link">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const downloadButton = document.getElementById('download-button');
+    
+    // Отслеживаем статистику загрузок
+    downloadButton.addEventListener('click', function() {
+        // Отправляем информацию о загрузке на сервер для статистики
+        fetch('/api/download-stats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                app: 'number-sum',
+                version: '1.0'
+            })
+        }).catch(error => {
+            console.error('Ошибка при отправке статистики:', error);
+        });
+    });
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Sum - Умный калькулятор для Android</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="/" class="logo">
+                    <img src="/images/logo.svg" alt="Number Sum" class="logo__img" onerror="this.src='/images/logo-placeholder.png'">
+                    <span class="logo__text">Number Sum</span>
+                </a>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="/" class="nav__link nav__link--active">Главная</a></li>
+                        <li class="nav__item"><a href="/about.html" class="nav__link">О приложении</a></li>
+                        <li class="nav__item"><a href="/pricing.html" class="nav__link">Купить</a></li>
+                        <li class="nav__item"><a href="/download.html" class="nav__link">Скачать</a></li>
+                    </ul>
+                </nav>
+                <div class="header__auth auth" id="authButtons">
+                    <a href="/auth/login.html" class="auth__link">Войти</a>
+                    <a href="/auth/register.html" class="auth__btn btn">Регистрация</a>
+                </div>
+                <div class="header__user user hidden" id="userInfo">
+                    <span class="user__name" id="userName"></span>
+                    <a href="/account/" class="user__account">Личный кабинет</a>
+                    <button class="user__logout" id="logoutBtn">Выйти</button>
+                </div>
+                <button class="header__burger" id="burgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <div class="hero__inner">
+                    <div class="hero__content">
+                        <h1 class="hero__title">Number Sum - Умный калькулятор для Android</h1>
+                        <p class="hero__text">Простое и удобное приложение для выполнения математических операций с высокой точностью.</p>
+                        
+                        <div id="auth-message" class="message-box message-warning hidden">
+                            Для покупки приложения необходимо авторизоваться
+                        </div>
+                        
+                        <div id="success-message" class="message-box message-success hidden">
+                            Оплата успешно завершена! Лицензия активирована
+                        </div>
+                        
+                        <div class="hero__btns">
+                            <a href="#" id="buy-button" class="btn btn--primary">Купить за 10 ₽</a>
+                            <a href="/download.html" class="btn btn--outline">Скачать бесплатно</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Почему Number Sum?</h2>
+                <div class="features__inner">
+                    <div class="features__item">
+                        <div class="features__icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="features__title">Быстрые расчеты</h3>
+                        <p class="features__text">Моментально суммируйте любые числа с высокой точностью</p>
+                    </div>
+                    <div class="features__item">
+                        <div class="features__icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="features__title">Высокая точность</h3>
+                        <p class="features__text">Никаких округлений или ошибок в вычислениях</p>
+                    </div>
+                    <div class="features__item">
+                        <div class="features__icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="features__title">Безопасность</h3>
+                        <p class="features__text">Не требует лишних разрешений и не собирает данные</p>
+                    </div>
+                    <div class="features__item">
+                        <div class="features__icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h3 class="features__title">Темная тема</h3>
+                        <p class="features__text">Комфортная работа в условиях недостаточного освещения</p>
+                    </div>
+                    <div class="features__item">
+                        <div class="features__icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="features__title">Простой интерфейс</h3>
+                        <p class="features__text">Интуитивно понятное управление для быстрого выполнения расчетов</p>
+                    </div>
+                    <div class="features__item">
+                        <div class="features__icon">
+                            <i class="fas fa-ad"></i>
+                        </div>
+                        <h3 class="features__title">Без рекламы</h3>
+                        <p class="features__text">Никаких всплывающих окон и баннеров, отвлекающих от работы</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <div class="cta__inner">
+                    <h2 class="cta__title">Готовы попробовать Number Sum?</h2>
+                    <p class="cta__text">Скачайте приложение прямо сейчас и оцените все его преимущества. Для полного доступа ко всем функциям приобретите лицензию всего за 10 рублей.</p>
+                    <div class="cta__btns">
+                        <a href="/pricing.html" class="cta__btn btn btn--primary">Купить лицензию</a>
+                        <a href="/download.html" class="cta__btn btn">Скачать бесплатно</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__info">
+                    <a href="/" class="footer__logo logo">
+                        <img src="/images/logo.svg" alt="Number Sum" class="logo__img" onerror="this.src='/images/logo-placeholder.png'">
+                        <span class="logo__text">Number Sum</span>
+                    </a>
+                    <p class="footer__text">Number Sum — умный калькулятор для точных и быстрых расчетов на Android.</p>
+                </div>
+                <div class="footer__nav">
+                    <div class="footer__col">
+                        <h3 class="footer__title">Навигация</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="/" class="footer__link">Главная</a></li>
+                            <li class="footer__item"><a href="/about.html" class="footer__link">О приложении</a></li>
+                            <li class="footer__item"><a href="/pricing.html" class="footer__link">Купить</a></li>
+                            <li class="footer__item"><a href="/download.html" class="footer__link">Скачать</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h3 class="footer__title">Аккаунт</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="/auth/login.html" class="footer__link">Войти</a></li>
+                            <li class="footer__item"><a href="/auth/register.html" class="footer__link">Регистрация</a></li>
+                            <li class="footer__item"><a href="/account/" class="footer__link">Личный кабинет</a></li>
+                            <li class="footer__item"><a href="/account/license.html" class="footer__link">Лицензия</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h3 class="footer__title">Контакты</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="mailto:support@numbersum.ru" class="footer__link">support@numbersum.ru</a></li>
+                            <li class="footer__item"><a href="tel:+78001234567" class="footer__link">8 (800) 123-45-67</a></li>
+                        </ul>
+                        <div class="footer__social">
+                            <a href="#" class="footer__social-link"><i class="fab fa-vk"></i></a>
+                            <a href="#" class="footer__social-link"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="#" class="footer__social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 Number Sum. Все права защищены.</p>
+                <div class="footer__links">
+                    <a href="/privacy.html" class="footer__bottom-link">Политика конфиденциальности</a>
+                    <a href="/terms.html" class="footer__bottom-link">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем успешную оплату
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                document.getElementById('success-message').classList.remove('hidden');
+            }
+            
+            // Получаем элементы DOM
+            const authButtons = document.getElementById('authButtons');
+            const userInfo = document.getElementById('userInfo');
+            const userName = document.getElementById('userName');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const buyButton = document.getElementById('buy-button');
+            const authMessage = document.getElementById('auth-message');
+            const successMessage = document.getElementById('success-message');
+            
+            // Проверяем, авторизован ли пользователь
+            const token = localStorage.getItem('token');
+            const userData = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (token) {
+                // Пользователь авторизован
+                authButtons.classList.add('hidden');
+                userInfo.classList.remove('hidden');
+                userName.textContent = userData.username || userData.email || 'Пользователь';
+                authMessage.classList.add('hidden');
+                
+                // Запускаем периодическую проверку платежей
+                startPaymentCheck(token, successMessage);
+                
+                // Обработчик выхода
+                logoutBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    window.location.reload();
+                });
+                
+                // Обработчик покупки для авторизованного пользователя
+                buyButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Создаем запрос на оплату
+                    fetch('/api/payments', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ amount: 10.00 })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Сохраняем ID платежа и перенаправляем на страницу оплаты
+                            localStorage.setItem('paymentId', data.data.paymentId);
+                            window.location.href = data.data.paymentLink;
+                        } else {
+                            alert('Ошибка при создании платежа: ' + (data.error || 'Неизвестная ошибка'));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка:', error);
+                        alert('Ошибка соединения с сервером');
+                    });
+                });
+            } else {
+                // Пользователь не авторизован
+                authButtons.classList.remove('hidden');
+                userInfo.classList.add('hidden');
+                
+                // Показываем сообщение о необходимости авторизации
+                authMessage.classList.remove('hidden');
+                
+                // Перенаправляем на страницу входа при нажатии на кнопку покупки
+                buyButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = '/auth/login.html?redirect=/';
+                });
+            }
+        });
+        
+        // Функция для проверки недавних платежей
+        function startPaymentCheck(token, successMessageElement) {
+            // Проверяем есть ли локальная информация о платеже
+            if (localStorage.getItem('paymentStatus') === 'completed') {
+                // Проверяем, что оплата была недавно (не более 5 минут назад)
+                const lastPaymentTime = new Date(localStorage.getItem('lastPaymentTimestamp') || 0);
+                const currentTime = new Date();
+                const timeDiff = (currentTime - lastPaymentTime) / 1000 / 60; // разница в минутах
+                
+                if (timeDiff <= 5) {
+                    // Показываем сообщение об успешной оплате
+                    successMessageElement.classList.remove('hidden');
+                    
+                    // Сбрасываем статус через 1 минуту
+                    setTimeout(() => {
+                        localStorage.removeItem('paymentStatus');
+                    }, 60000);
+                    
+                    return;
+                } else {
+                    // Если прошло больше 5 минут, сбрасываем статус
+                    localStorage.removeItem('paymentStatus');
+                }
+            }
+            
+            // Запускаем периодическую проверку на сервере
+            const checkInterval = setInterval(() => {
+                if (!token) {
+                    clearInterval(checkInterval);
+                    return;
+                }
+                
+                fetch('/api/payments/check-recent', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.hasRecentPayment) {
+                        // Показываем сообщение об успешной оплате
+                        successMessageElement.classList.remove('hidden');
+                        
+                        // Сохраняем локально статус оплаты
+                        localStorage.setItem('paymentStatus', 'completed');
+                        localStorage.setItem('lastPaymentTimestamp', new Date().toISOString());
+                        
+                        // Прекращаем проверку после успешной оплаты
+                        clearInterval(checkInterval);
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при проверке платежей:', error);
+                });
+            }, 1000); // проверка каждые 5 секунд
+            
+            // Останавливаем проверку после 10 минут
+            setTimeout(() => {
+                clearInterval(checkInterval);
+            }, 10 * 60 * 1000);
+        }
+    </script>
+</body>
+</html>

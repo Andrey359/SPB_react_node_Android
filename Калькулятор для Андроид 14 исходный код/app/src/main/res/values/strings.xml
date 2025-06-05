@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Number Sum</string>
+    <string name="enter_first_number">Введите первое число</string>
+    <string name="enter_second_number">Введите второе число</string>
+    <string name="calculate">Посчитать</string>
+    <string name="result">Результат: </string>
+    <string name="please_enter_valid_numbers">Пожалуйста, введите корректные числа</string>
+    <string name="login">Войти</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="email">Email</string>
+    <string name="password">Пароль</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="login_account">Вход в аккаунт</string>
+    <string name="license_required">Требуется лицензия</string>
+    <string name="license_message">Для использования приложения необходимо приобрести лицензию. Стоимость: 10 млн. рублей.</string>
+    <string name="buy">Купить</string>
+    <string name="later">Позже</string>
+    <string name="error">Ошибка</string>
+</resources>

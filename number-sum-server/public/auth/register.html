@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - Number Sum</title>
+    <meta name="description" content="Создайте аккаунт Number Sum для доступа к лицензии и настройкам приложения.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/favicon.ico">
+</head>
+<body>
+    <!-- Header остается без изменений -->
+    
+    <main class="main">
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-container">
+                    <h1 class="auth-title">Регистрация</h1>
+                    
+                    <form id="registerForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="register-email" class="form-label">Email</label>
+                            <input type="email" id="register-email" class="form-control" required>
+                            <small class="form-hint">Мы отправим письмо для подтверждения адреса</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-password" class="form-label">Пароль</label>
+                            <input type="password" id="register-password" class="form-control" required>
+                            <small class="form-hint">Не менее 6 символов, включая буквы и цифры</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-confirm-password" class="form-label">Подтверждение пароля</label>
+                            <input type="password" id="register-confirm-password" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input type="checkbox" id="terms-agree" class="form-check-input" required>
+                            <label for="terms-agree" class="form-check-label">Я согласен с <a href="#" class="terms-link">условиями использования</a> и <a href="#" class="privacy-link">политикой конфиденциальности</a></label>
+                        </div>
+                        
+                        <div id="register-error" class="form-error"></div>
+                        
+                        <button type="submit" class="auth-btn btn btn--primary">Зарегистрироваться</button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p>Уже есть аккаунт? <a href="/auth/login.html" class="auth-link">Войти</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer остается без изменений -->
+    
+    <!-- Добавляем всплывающие окна для условий и политики -->
+    <div id="terms-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2>Условия использования</h2>
+            
+            <div class="popup-body">
+                <h3>1. Принятие условий</h3>
+                <p>Пользуясь приложением Number Sum, вы соглашаетесь с настоящими условиями использования. Если вы не согласны с условиями, не используйте приложение.</p>
+                
+                <h3>2. Лицензия</h3>
+                <p>После покупки лицензии вы получаете бессрочное право использовать полную версию приложения на нескольких устройствах с вашей учетной записью.</p>
+                
+                <h3>3. Ограничения</h3>
+                <p>Запрещается копировать, модифицировать, распространять или использовать приложение способами, нарушающими законодательство РФ.</p>
+                
+                <h3>4. Ответственность</h3>
+                <p>Приложение предоставляется "как есть". Мы не несём ответственности за убытки, связанные с использованием или невозможностью использования приложения.</p>
+                
+                <h3>5. Изменения условий</h3>
+                <p>Мы оставляем за собой право изменять данные условия. Текущая версия условий всегда доступна на нашем сайте.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="privacy-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2>Политика конфиденциальности</h2>
+            
+            <div class="popup-body">
+                <h3>1. Собираемые данные</h3>
+                <p>Для работы приложения Number Sum мы собираем следующие данные: адрес электронной почты. В процессе использования приложения могут создаваться история вычислений и настройки.</p>
+                
+                <h3>2. Использование данных</h3>
+                <p>Собранные данные используются исключительно для обеспечения работы приложения, активации лицензии и отправки важных уведомлений.</p>
+                
+                <h3>3. Защита данных</h3>
+                <p>Мы применяем технические и организационные меры для защиты ваших данных от несанкционированного доступа.</p>
+                
+                <h3>4. Срок хранения</h3>
+                <p>Ваши данные хранятся на протяжении всего срока использования вами приложения, а также могут храниться в течение 3 лет после последнего использования.</p>
+                
+                <h3>5. Ваши права</h3>
+                <p>Вы имеете право на доступ к своим данным, их исправление, удаление и ограничение обработки. Для реализации этих прав обратитесь в службу поддержки.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Добавляем стили для всплывающих окон -->
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .popup-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            width: 80%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-popup {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-popup:hover,
+        .close-popup:focus {
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .popup-body {
+            margin-top: 20px;
+        }
+        
+        .popup h2 {
+            margin-top: 0;
+            color: #4A90E2;
+        }
+        
+        .popup h3 {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+    
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('token');
+            
+            if (token) {
+                // Если пользователь уже авторизован, перенаправляем в личный кабинет
+                window.location.href = '/account/';
+            }
+            
+            // Настройка всплывающих окон
+            const termsPopup = document.getElementById('terms-popup');
+            const privacyPopup = document.getElementById('privacy-popup');
+            const termsLink = document.querySelector('.terms-link');
+            const privacyLink = document.querySelector('.privacy-link');
+            const closeButtons = document.querySelectorAll('.close-popup');
+            
+            // Открытие всплывающих окон
+            termsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                termsPopup.style.display = 'block';
+            });
+            
+            privacyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                privacyPopup.style.display = 'block';
+            });
+            
+            // Закрытие всплывающих окон
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    termsPopup.style.display = 'none';
+                    privacyPopup.style.display = 'none';
+                });
+            });
+            
+            // Закрытие при клике вне содержимого
+            window.addEventListener('click', function(event) {
+                if (event.target === termsPopup) {
+                    termsPopup.style.display = 'none';
+                }
+                if (event.target === privacyPopup) {
+                    privacyPopup.style.display = 'none';
+                }
+            });
+            
+            // Валидация формы регистрации
+            const registerForm = document.getElementById('registerForm');
+            
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('register-email').value;
+                    const password = document.getElementById('register-password').value;
+                    const confirmPassword = document.getElementById('register-confirm-password').value;
+                    const termsAgree = document.getElementById('terms-agree').checked;
+                    const errorElement = document.getElementById('register-error');
+                    
+                    // Сбрасываем сообщение об ошибке
+                    errorElement.textContent = '';
+                    
+                    // Проверка email
+                    if (!isValidEmail(email)) {
+                        errorElement.textContent = 'Пожалуйста, введите корректный email адрес';
+                        return;
+                    }
+                    
+                    // Проверка пароля
+                    if (!isValidPassword(password)) {
+                        errorElement.textContent = 'Пароль должен содержать не менее 6 символов, включая буквы и цифры';
+                        return;
+                    }
+                    
+                    // Проверка совпадения паролей
+                    if (password !== confirmPassword) {
+                        errorElement.textContent = 'Пароли не совпадают';
+                        return;
+                    }
+                    
+                    // Проверка согласия с условиями
+                    if (!termsAgree) {
+                        errorElement.textContent = 'Необходимо согласиться с условиями использования и политикой конфиденциальности';
+                        return;
+                    }
+                    
+                    // Отправка данных на сервер для регистрации
+                    fetch('/api/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email,
+                            // Генерируем имя пользователя из части email
+                            username: email.split('@')[0],
+                            password
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Сохраняем токен и данные пользователя
+                            localStorage.setItem('token', data.token);
+                            localStorage.setItem('user', JSON.stringify(data.user));
+                            
+                            // Показываем сообщение об успешной регистрации
+                            showSuccessMessage('Регистрация прошла успешно! На ваш email отправлено письмо для подтверждения.');
+                            
+                            // Перенаправляем на страницу подтверждения email
+                            setTimeout(() => {
+                                window.location.href = '/email-verification.html';
+                            }, 3000);
+                        } else {
+                            // Показываем сообщение об ошибке
+                            errorElement.textContent = data.error || 'Ошибка при регистрации';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при регистрации:', error);
+                        errorElement.textContent = 'Ошибка соединения с сервером';
+                    });
+                });
+            }
+        });
+        
+        // Функция для проверки email
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Функция для проверки пароля
+        function isValidPassword(password) {
+            return password.length >= 6 && /[a-zA-Z]/.test(password) && /\d/.test(password);
+        }
+        
+        // Функция для отображения сообщения об успехе
+        function showSuccessMessage(message) {
+            const messageEl = document.createElement('div');
+            messageEl.className = 'success-message';
+            messageEl.textContent = message;
+            
+            // Добавляем стили
+            messageEl.style.position = 'fixed';
+            messageEl.style.top = '20px';
+            messageEl.style.left = '50%';
+            messageEl.style.transform = 'translateX(-50%)';
+            messageEl.style.backgroundColor = '#2ECC71';
+            messageEl.style.color = 'white';
+            messageEl.style.padding = '15px 30px';
+            messageEl.style.borderRadius = '4px';
+            messageEl.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            messageEl.style.zIndex = '9999';
+            
+            // Добавляем элемент на страницу
+            document.body.appendChild(messageEl);
+            
+            // Удаляем сообщение через 3 секунды
+            setTimeout(() => {
+                messageEl.style.opacity = '0';
+                messageEl.style.transition = 'opacity 0.5s ease';
+                
+                setTimeout(() => {
+                    document.body.removeChild(messageEl);
+                }, 500);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

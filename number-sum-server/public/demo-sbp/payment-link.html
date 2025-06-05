@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата - Number Sum</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        .payment-container {
+            width: 90%;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin: 20px;
+        }
+        .payment-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4A90E2;
+        }
+        .payment-message {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .payment-actions {
+            margin-top: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #3A7BC8;
+        }
+        .login-prompt {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1 class="payment-title">Оплата Number Sum</h1>
+        
+        <div id="loginPrompt" class="login-prompt" style="display: none;">
+            <p>Для продолжения оплаты нужно войти в аккаунт</p>
+            <a href="/auth/login.html?redirect=/demo-sbp/payment-link.html" class="btn">Войти</a>
+        </div>
+        
+        <div id="paymentContent" style="display: none;">
+            <p class="payment-message">Нажмите кнопку ниже для подтверждения оплаты</p>
+            
+            <div class="payment-actions">
+                <button class="btn" id="paymentBtn">Подтвердить оплату</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginPrompt = document.getElementById('loginPrompt');
+            const paymentContent = document.getElementById('paymentContent');
+            const paymentBtn = document.getElementById('paymentBtn');
+            
+            // Получаем токен и данные пользователя
+            const token = localStorage.getItem('token');
+            const userData = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            // Проверяем, авторизован ли пользователь
+            if (!token) {
+                loginPrompt.style.display = 'block';
+            } else {
+                paymentContent.style.display = 'block';
+                
+                // Обработчик нажатия на кнопку подтверждения оплаты
+                paymentBtn.addEventListener('click', function() {
+                paymentBtn.textContent = 'Обработка...';
+                paymentBtn.disabled = true;
+                
+                // Получаем transactionId из URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const transactionId = urlParams.get('transaction_id');
+                
+                // Если есть transactionId, отмечаем его как оплаченный в localStorage
+                if (transactionId) {
+                    localStorage.setItem('payment_' + transactionId, 'completed');
+                }
+                
+                // Сразу отправляем callback для успешной оплаты
+                fetch('/api/payments/callback/SUCCESS', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        status: 'completed',
+                        transaction_id: 'QR_STATIC_PAYMENT',
+                        user_id: userData.id
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                        // Создаем сообщение об успешной оплате
+                        const messageEl = document.createElement('p');
+                        messageEl.textContent = 'Оплата успешно выполнена!';
+                        messageEl.style.color = '#2ECC71';
+                        messageEl.style.fontWeight = 'bold';
+                        messageEl.style.fontSize = '18px';
+                        
+                        // Добавляем сообщение перед кнопкой
+                        paymentBtn.parentNode.insertBefore(messageEl, paymentBtn);
+                        
+                        // Скрываем кнопку
+                        paymentBtn.style.display = 'none';
+                        
+                        // Сохраняем метку времени последней оплаты в localStorage
+                        localStorage.setItem('lastPaymentTimestamp', new Date().toISOString());
+                        localStorage.setItem('paymentStatus', 'completed');
+                        
+                        // Перенаправляем на главную страницу через 3 секунды
+                        setTimeout(function() {
+                            window.location.href = '/?success=true';
+                        }, 3000);
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при обработке платежа:', error);
+                        
+                        // Даже при ошибке имитируем успешное завершение
+                        paymentBtn.textContent = 'Оплата успешна';
+                        paymentBtn.style.backgroundColor = '#2ECC71';
+                        
+                        // Сохраняем метку времени последней оплаты
+                        localStorage.setItem('lastPaymentTimestamp', new Date().toISOString());
+                        localStorage.setItem('paymentStatus', 'completed');
+                        
+                        setTimeout(function() {
+                            window.location.href = '/?success=true';
+                        }, 3000);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

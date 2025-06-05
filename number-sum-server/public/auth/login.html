@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - Number Sum</title>
+    <meta name="description" content="Вход в аккаунт Number Sum для доступа к функциям приложения.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/favicon.ico">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="/" class="logo">
+                    <img src="/images/logo.svg" alt="Number Sum" class="logo__img" onerror="this.src='/images/logo-placeholder.png'">
+                    <span class="logo__text">Number Sum</span>
+                </a>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="/" class="nav__link">Главная</a></li>
+                        <li class="nav__item"><a href="/about.html" class="nav__link">О приложении</a></li>
+                        <li class="nav__item"><a href="/pricing.html" class="nav__link">Купить</a></li>
+                        <li class="nav__item"><a href="/download.html" class="nav__link">Скачать</a></li>
+                    </ul>
+                </nav>
+                <div class="header__auth auth" id="authButtons">
+                    <a href="/auth/login.html" class="auth__link auth__link--active">Войти</a>
+                    <a href="/auth/register.html" class="auth__btn btn">Регистрация</a>
+                </div>
+                <div class="header__user user hidden" id="userInfo">
+                    <span class="user__name" id="userName"></span>
+                    <a href="/account/" class="user__account">Личный кабинет</a>
+                    <button class="user__logout" id="logoutBtn">Выйти</button>
+                </div>
+                <button class="header__burger" id="burgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-container">
+                    <h1 class="auth-title">Вход в аккаунт</h1>
+                    
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="login-email" class="form-label">Email</label>
+                            <input type="email" id="login-email" name="email" class="form-control" required autocomplete="email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password" class="form-label">Пароль</label>
+                            <input type="password" id="login-password" name="password" class="form-control" required autocomplete="current-password">
+                        </div>
+                        
+                        <div id="login-error" class="form-error"></div>
+                        
+                        <button type="submit" class="auth-btn btn btn--primary">Войти</button>
+                        
+                        <div class="form-links">
+                            <a href="/auth/forgot-password.html" class="form-link">Забыли пароль?</a>
+                        </div>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p>Нет аккаунта? <a href="/auth/register.html" class="auth-link">Зарегистрироваться</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__info">
+                    <a href="/" class="footer__logo logo">
+                        <img src="/images/logo.svg" alt="Number Sum" class="logo__img" onerror="this.src='/images/logo-placeholder.png'">
+                        <span class="logo__text">Number Sum</span>
+                    </a>
+                    <p class="footer__text">Number Sum — умный калькулятор для точных и быстрых расчетов на Android.</p>
+                </div>
+                <div class="footer__nav">
+                    <div class="footer__col">
+                        <h3 class="footer__title">Навигация</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="/" class="footer__link">Главная</a></li>
+                            <li class="footer__item"><a href="/about.html" class="footer__link">О приложении</a></li>
+                            <li class="footer__item"><a href="/pricing.html" class="footer__link">Купить</a></li>
+                            <li class="footer__item"><a href="/download.html" class="footer__link">Скачать</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h3 class="footer__title">Аккаунт</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="/auth/login.html" class="footer__link">Войти</a></li>
+                            <li class="footer__item"><a href="/auth/register.html" class="footer__link">Регистрация</a></li>
+                            <li class="footer__item"><a href="/account/" class="footer__link">Личный кабинет</a></li>
+                            <li class="footer__item"><a href="/account/license.html" class="footer__link">Лицензия</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__col">
+                        <h3 class="footer__title">Контакты</h3>
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="mailto:support@numbersum.ru" class="footer__link">support@numbersum.ru</a></li>
+                            <li class="footer__item"><a href="tel:+78001234567" class="footer__link">8 (800) 123-45-67</a></li>
+                        </ul>
+                        <div class="footer__social">
+                            <a href="#" class="footer__social-link"><i class="fab fa-vk"></i></a>
+                            <a href="#" class="footer__social-link"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="#" class="footer__social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 Number Sum. Все права защищены.</p>
+                <div class="footer__links">
+                    <a href="/privacy.html" class="footer__bottom-link">Политика конфиденциальности</a>
+                    <a href="/terms.html" class="footer__bottom-link">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginError = document.getElementById('login-error');
+            
+            // Получаем параметр redirect из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectUrl = urlParams.get('redirect') || '/account/';
+            
+            // Проверяем, авторизован ли пользователь
+            const token = localStorage.getItem('token');
+            if (token) {
+                // Если пользователь уже авторизован, перенаправляем
+                window.location.href = redirectUrl;
+                return;
+            }
+            
+            // Обработчик формы входа
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                // Очищаем ошибки
+                loginError.textContent = '';
+                
+                // Отправляем запрос на сервер
+                fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Сохраняем токен и данные пользователя
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        
+                        // Перенаправляем на указанную страницу
+                        window.location.href = redirectUrl;
+                    } else {
+                        // Показываем ошибку
+                        loginError.textContent = data.error || 'Ошибка при входе';
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка при входе:', error);
+                    loginError.textContent = 'Ошибка соединения с сервером';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

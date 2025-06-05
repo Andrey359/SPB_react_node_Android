@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Number Sum - Калькулятор"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"/>
+
+    <EditText
+        android:id="@+id/number1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите первое число"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/number2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите второе число"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="24dp"/>
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Посчитать"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Результат: "
+        android:textSize="18sp"
+        android:layout_marginBottom="32dp"/>
+
+    <Button
+        android:id="@+id/openWebsiteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Открыть сайт"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/licenseStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Статус лицензии: Проверка..."
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

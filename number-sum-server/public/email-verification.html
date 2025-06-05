@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтвердите email - Number Sum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/favicon.ico">
+</head>
+<body>
+    <!-- Header остается без изменений -->
+    
+    <main class="main">
+        <div class="container" style="padding: 80px 20px; max-width: 600px; margin: 0 auto; text-align: center;">
+            <div style="background-color: white; padding: 40px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <i class="fas fa-envelope" style="font-size: 64px; color: #4A90E2; margin-bottom: 20px;"></i>
+                <h1>Подтвердите ваш email</h1>
+                <p style="margin: 20px 0;">Мы отправили письмо с ссылкой для подтверждения на ваш email. Пожалуйста, проверьте вашу почту и перейдите по ссылке для завершения регистрации.</p>
+                <p style="margin-bottom: 30px;">Если вы не получили письмо, проверьте папку "Спам" или нажмите на кнопку ниже для повторной отправки.</p>
+                <button id="resendEmail" class="btn btn--primary">Отправить письмо повторно</button>
+                <div id="resendMessage" style="margin-top: 15px; color: #4A90E2; display: none;"></div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer остается без изменений -->
+    
+    <script src="/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const resendButton = document.getElementById('resendEmail');
+            const resendMessage = document.getElementById('resendMessage');
+            const userData = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            if (!userData.email) {
+                // Если нет данных пользователя, перенаправляем на главную
+                window.location.href = '/';
+            }
+            
+            resendButton.addEventListener('click', function() {
+                // Блокируем кнопку на время отправки
+                resendButton.disabled = true;
+                resendButton.textContent = 'Отправка...';
+                
+                // Запрос на повторную отправку письма
+                fetch('/api/auth/resend-verification', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({ email: userData.email })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        resendMessage.textContent = 'Письмо успешно отправлено! Проверьте вашу почту.';
+                        resendMessage.style.color = '#2ECC71';
+                    } else {
+                        resendMessage.textContent = data.error || 'Не удалось отправить письмо. Попробуйте позже.';
+                        resendMessage.style.color = '#E74C3C';
+                    }
+                    
+                    // Разблокируем кнопку через 30 секунд
+                    setTimeout(() => {
+                        resendButton.disabled = false;
+                        resendButton.textContent = 'Отправить письмо повторно';
+                    }, 30000);
+                    
+                    resendMessage.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Ошибка при отправке запроса:', error);
+                    resendMessage.textContent = 'Ошибка соединения с сервером. Попробуйте позже.';
+                    resendMessage.style.color = '#E74C3C';
+                    resendMessage.style.display = 'block';
+                    
+                    resendButton.disabled = false;
+                    resendButton.textContent = 'Отправить письмо повторно';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

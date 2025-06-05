@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата через СБП - Number Sum</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .payment-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
+        }
+        .sbp-logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        .payment-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .payment-details {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .payment-details p {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .payment-details .detail-label {
+            font-weight: bold;
+            color: #666;
+        }
+        .payment-details .detail-value {
+            font-weight: bold;
+        }
+        .qr-code {
+            margin: 30px auto;
+            max-width: 250px;
+        }
+        .qr-code img {
+            width: 100%;
+            height: auto;
+        }
+        .payment-actions {
+            margin-top: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #3A7BC8;
+        }
+        .timer {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .payment-status {
+            font-size: 18px;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .payment-status.pending {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+        .payment-status.success {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+        .payment-status.error {
+            background-color: #F8D7DA;
+            color: #721C24;
+        }
+        .payment-instructions {
+            text-align: left;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .payment-instructions h3 {
+            margin-bottom: 15px;
+        }
+        .payment-instructions ol {
+            padding-left: 20px;
+        }
+        .payment-instructions li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+       <h1 class="payment-title">Оплата через СБП</h1>
+        
+        <div class="payment-status pending" id="paymentStatus">
+            Ожидание оплаты...
+        </div>
+        
+        <div class="payment-details">
+            <p>
+                <span class="detail-label">Получатель:</span>
+                <span class="detail-value">Number Sum App</span>
+            </p>
+            <p>
+                <span class="detail-label">Сумма:</span>
+                <span class="detail-value" id="paymentAmount">10.00 ₽</span>
+            </p>
+            <p>
+                <span class="detail-label">Назначение:</span>
+                <span class="detail-value">Оплата приложения Number Sum</span>
+            </p>
+            <p>
+                <span class="detail-label">Номер операции:</span>
+                <span class="detail-value" id="transactionId">—</span>
+            </p>
+        </div>
+        
+        <div class="timer" id="timer">
+            05:00
+        </div>
+        
+        <div class="qr-code">
+            <img src="/demo-sbp/activation-qr.svg" alt="QR-код для оплаты" id="qrCode">
+        </div>
+        
+        <div class="payment-instructions">
+            <h3>Как оплатить:</h3>
+            <ol>
+                <li>Отсканируйте QR-код через приложение банка, поддерживающего СБП</li>
+                <li>Проверьте сумму и получателя платежа</li>
+                <li>Подтвердите платеж в приложении вашего банка</li>
+            </ol>
+        </div>
+        
+        <div class="payment-actions">
+            <button class="btn" id="successBtn">Оплатить</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Получаем параметры из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const amount = urlParams.get('amount') || '10.00';
+            const currency = urlParams.get('currency') || 'RUB';
+            
+            // Получаем ID транзакции из пути
+            const pathSegments = window.location.pathname.split('/');
+            const transactionId = pathSegments[pathSegments.length - 1];
+            
+            // Обновляем информацию на странице
+            document.getElementById('paymentAmount').textContent = `${amount} ${currency}`;
+            document.getElementById('transactionId').textContent = transactionId;
+            
+            // Настраиваем таймер (5 минут)
+            let timeLeft = 5 * 60; // 300 секунд (5 минут)
+            const timerElement = document.getElementById('timer');
+            
+            const timerInterval = setInterval(function() {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                
+                // При истечении времени
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    
+                    // Очищаем также интервал автоматической проверки, если он существует
+                    if (typeof autoCheckInterval !== 'undefined') {
+                        clearInterval(autoCheckInterval);
+                    }
+                    
+                    // Обновляем статус на странице
+                    document.getElementById('paymentStatus').textContent = 'Время ожидания истекло';
+                    document.getElementById('paymentStatus').className = 'payment-status error';
+                    
+                    // Скрываем кнопку оплаты
+                    document.getElementById('successBtn').style.display = 'none';
+                    
+                    // Перенаправляем на главную через 2 секунды
+                    setTimeout(function() {
+                        window.location.href = '/?payment=expired';
+                    }, 2000);
+                }
+            }, 1000); // Обновление каждую секунду
+            
+            // Автоматическая проверка статуса платежа каждую секунду
+            const autoCheckInterval = setInterval(function() {
+                // Проверяем, была ли уже оплата отмечена через localStorage
+                const paymentStatus = localStorage.getItem('payment_' + transactionId);
+                
+                // Если платеж уже был отмечен как оплаченный, обрабатываем это
+                if (paymentStatus === 'completed') {
+                    clearInterval(autoCheckInterval);
+                    clearInterval(timerInterval);
+                    
+                    // Обновляем статус на странице
+                    document.getElementById('paymentStatus').textContent = 'Оплата успешно выполнена';
+                    document.getElementById('paymentStatus').className = 'payment-status success';
+                    
+                    // Скрываем кнопку оплаты
+                    document.getElementById('successBtn').style.display = 'none';
+                    
+                    // Перенаправляем на главную страницу через 2 секунды
+                    setTimeout(function() {
+                        window.location.href = '/?success=true';
+                    }, 2000);
+                }
+            }, 1000); // Проверка каждую секунду
+            
+            // Обработчик для кнопки "Оплатить"
+            document.getElementById('successBtn').addEventListener('click', function() {
+                // Перенаправляем на страницу payment-link.html
+                window.location.href = '/demo-sbp/payment-link.html?transaction_id=' + transactionId;
+            });
+        });
+    </script>
+</body>
+</html>
